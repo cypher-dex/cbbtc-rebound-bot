@@ -38,8 +38,8 @@ await runBars({
     if (last <= peak * (1 - 0.012) && last > prev) {
       const byWeight = (BigInt(caps.max_weight_bps) * state.equity) / BPS;
       const size = state.cash < byWeight ? state.cash : byWeight;
-      if (size >= minNotional) {
       if (size >= minNotional) orders.push({ side: 'buy', symbol, notional_quote_units: size, max_slippage_bps: 100 });
+      return orders;
     }
 
     if (!filled && !guardSent && closes.length >= 1380 && state.cash >= minNotional) {
